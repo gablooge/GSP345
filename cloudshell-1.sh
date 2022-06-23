@@ -105,10 +105,8 @@ cp variables.tf modules/storage/variables.tf
 
 terraform init
 
-# TODO: 
-# Import the from https://console.cloud.google.com/compute/instances
-# terraform import module.instances.google_compute_instance.tf-instance-1 6024091089285215307
-# terraform import module.instances.google_compute_instance.tf-instance-2 2165260761368163402
+terraform import module.instances.google_compute_instance.tf-instance-1 $(gcloud compute instances describe tf-instance-1 --zone us-central1-a --format="value(id)")
+terraform import module.instances.google_compute_instance.tf-instance-2 $(gcloud compute instances describe tf-instance-2 --zone us-central1-a --format="value(id)")
 
 terraform plan
 terraform apply -auto-approve
